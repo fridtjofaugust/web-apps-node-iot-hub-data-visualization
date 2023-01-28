@@ -13,18 +13,24 @@ $(document).ready(() => {
       this.maxLen = 50;
       this.timeData = new Array(this.maxLen);
       this.temperatureData = new Array(this.maxLen);
+      this.pressureData = new Array(this.maxLen);
+      this.ambientData = new Array(this.maxLen);
       this.humidityData = new Array(this.maxLen);
     }
 
-    addData(time, temperature, humidity) {
+    addData(time, temperature, humidity, pressure, ambient) {
       this.timeData.push(time);
       this.temperatureData.push(temperature);
+      this.pressureData.push(pressure);
+      this.ambientData.push(ambient);
       this.humidityData.push(humidity || null);
 
       if (this.timeData.length > this.maxLen) {
         this.timeData.shift();
         this.temperatureData.shift();
         this.humidityData.shift();
+        this.pressureData.shift();
+        this.ambientData.shift();
       }
     }
   }
@@ -69,6 +75,28 @@ $(document).ready(() => {
       },
       {
         fill: false,
+        label: 'Pressure',
+        yAxisID: 'Pressure',
+        borderColor: 'rgba(255, 204, 0, 1)',
+        pointBoarderColor: 'rgba(255, 204, 0, 1)',
+        backgroundColor: 'rgba(255, 204, 0, 0.4)',
+        pointHoverBackgroundColor: 'rgba(255, 204, 0, 1)',
+        pointHoverBorderColor: 'rgba(255, 204, 0, 1)',
+        spanGaps: true,
+      },
+      {
+        fill: false,
+        label: 'Ambient',
+        yAxisID: 'Ambient',
+        borderColor: 'rgba(255, 204, 0, 1)',
+        pointBoarderColor: 'rgba(255, 204, 0, 1)',
+        backgroundColor: 'rgba(255, 204, 0, 0.4)',
+        pointHoverBackgroundColor: 'rgba(255, 204, 0, 1)',
+        pointHoverBorderColor: 'rgba(255, 204, 0, 1)',
+        spanGaps: true,
+      },
+      {
+        fill: false,
         label: 'Humidity',
         yAxisID: 'Humidity',
         borderColor: 'rgba(24, 120, 240, 1)',
@@ -88,6 +116,24 @@ $(document).ready(() => {
         type: 'linear',
         scaleLabel: {
           labelString: 'Temperature (ºC)',
+          display: true,
+        },
+        position: 'left',
+      },
+      {
+        id: 'Pressure',
+        type: 'linear',
+        scaleLabel: {
+          labelString: 'Pressure',
+          display: true,
+        },
+        position: 'left',
+      },
+      {
+        id: 'Ambient',
+        type: 'linear',
+        scaleLabel: {
+          labelString: 'Ambient',
           display: true,
         },
         position: 'left',
@@ -124,6 +170,8 @@ $(document).ready(() => {
     chartData.labels = device.timeData;
     chartData.datasets[0].data = device.temperatureData;
     chartData.datasets[1].data = device.humidityData;
+    chartData.datasets[2].data = device.pressureData;
+    chartData.datasets[3].data = device.ambientData;
     myLineChart.update();
   }
   listOfDevices.addEventListener('change', OnSelectionChange, false);
