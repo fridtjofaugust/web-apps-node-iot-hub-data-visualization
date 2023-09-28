@@ -27,7 +27,8 @@ body select {
   color: #444444;
   line-height: 16px;
   appearance: none;
-  /* this is must */ -webkit-appearance: none;
+  /* this is must */
+  -webkit-appearance: none;
   -moz-appearance: none;
 }
 
@@ -43,4 +44,13 @@ select::-ms-expand {
 
 select:disabled::-ms-expand {
   background: #f60;
+}
+
+.gauge-charts {
+  display: flex;
+}
+
+.charts .chart-container {
+  width: 500px;
+  height: 500px;
 }
