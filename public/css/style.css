@@ -46,11 +46,30 @@ select:disabled::-ms-expand {
   background: #f60;
 }
 
-.gauge-charts {
-  display: flex;
+.border {
+  border: solid 1px #ccc;
+  border-radius: 0.8rem;
 }
 
-.charts .chart-container {
+.gauge-charts {
+  margin-top: 2rem;
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.chart-container {
   width: 500px;
   height: 500px;
+
+  transition: transform 0.2s ease-in-out;
+}
+
+.chart-container:hover {
+  box-shadow: 0 0 10px #ccc;
+  transform: scale(1.01);
+}
+
+.chart-spline {
+  margin-top: 5rem;
 }
